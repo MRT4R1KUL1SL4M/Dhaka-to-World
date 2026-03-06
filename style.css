@@ -1,0 +1,107 @@
+:root {
+    --bg: #050505;
+    --gold: #c5a059;
+    --cyan: #00f2ff;
+    --text-dim: #aaa;
+}
+
+body { background: var(--bg); color: #fff; font-family: 'Inter', sans-serif; margin: 0; }
+
+.global-reach { padding: 80px 20px; text-align: center; }
+.sub-title { color: var(--gold); letter-spacing: 4px; font-size: 11px; font-weight: bold; }
+.main-title { font-family: 'Playfair Display', serif; font-size: 50px; margin: 15px 0; letter-spacing: -1px; }
+.description { color: var(--text-dim); margin-bottom: 40px; font-weight: 300; }
+
+/* 3D Map Styling */
+.map-3d-wrapper {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    height: 800px; /* Space for the entire globe view */
+    border-radius: 50px;
+    overflow: hidden;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    box-shadow: 0 0 60px rgba(0, 0, 0, 1);
+}
+
+.map-bg-glow {
+    position: absolute;
+    width: 100%; height: 100%;
+    background: radial-gradient(circle at 50% 45%, rgba(0, 242, 255, 0.08), transparent 75%);
+    z-index: 1;
+}
+
+.bg-3d-map {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    opacity: 0.55;
+    filter: saturate(1.4) brightness(0.7) contrast(1.1);
+    z-index: 0;
+}
+
+.map-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, transparent 40%, rgba(0,0,0,0.85) 100%);
+    z-index: 2;
+}
+
+#global-map {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 5;
+}
+
+/* Hub & Pulse */
+.hub-point { fill: var(--cyan); filter: drop-shadow(0 0 12px var(--cyan)); }
+.hub-text { fill: #fff; font-size: 14px; font-weight: bold; text-anchor: middle; text-transform: uppercase; letter-spacing: 1px; }
+
+.hub-pulse {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 1.5;
+    animation: pulseGlow 3s infinite;
+}
+
+@keyframes pulseGlow {
+    0% { r: 5; opacity: 1; }
+    100% { r: 70; opacity: 0; }
+}
+
+/* Glowing Arcs */
+.arc-flow {
+    fill: none;
+    stroke: var(--cyan);
+    stroke-width: 1.5;
+    stroke-dasharray: 4, 180;
+    animation: flowLines 5s infinite linear;
+    filter: drop-shadow(0 0 6px var(--cyan));
+}
+
+@keyframes flowLines {
+    0% { stroke-dashoffset: 400; }
+    100% { stroke-dashoffset: 0; }
+}
+
+/* Stats Container */
+.stat-boxes {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 25px;
+    z-index: 10;
+}
+
+.box { 
+    background: rgba(10, 10, 10, 0.85); 
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    padding: 15px 35px; 
+    border-radius: 50px; 
+    backdrop-filter: blur(20px);
+}
+
+.box span { display: block; font-size: 9px; color: var(--gold); font-weight: bold; letter-spacing: 1px; }
+.box strong { font-size: 20px; color: #fff; }
+.box.highlight { border-color: var(--cyan); box-shadow: 0 0 25px rgba(0, 242, 255, 0.1); }
